@@ -1,6 +1,6 @@
-pillow
-tensorflow
-transformers
-gTTS
-torch
-streamlit
+pillow==10.4.0
+transformers==4.44.2
+gTTS==2.5.3
+torch==2.4.1
+streamlit==1.39.0
+requests==2.32.3
