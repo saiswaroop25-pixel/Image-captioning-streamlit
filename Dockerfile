@@ -25,8 +25,10 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
-# Prefetch model weights during build to avoid first-request cold start
-RUN python bootstrap_models.py || true
+# Prefetch model weights during build is optional (can be slow on small EC2)
+# Enable with: docker build --build-arg PREFETCH=true -t image-captioning:latest .
+ARG PREFETCH=false
+RUN if [ "$PREFETCH" = "true" ]; then python bootstrap_models.py || true; else echo "Skipping model prefetch"; fi
 
 EXPOSE 8501
 
